@@ -1,4 +1,86 @@
-listfile
-========
+# NAME
 
-类似shell的ls命令，但允许使用正则表达式/通配符匹配文件名
+lf - list files matching a regular expression
+
+![Screen-Shot](https://raw.github.com/redraiment/lf/master/screen-shot.jpg)
+
+# SYNOPSIS
+
+lf [OPTIONS] PATTERN...
+
+# DESCRIPTION
+
+lf lists the file and directory that matching the given pattern.
+It likes find (1) on UNIX like system, but find (1) use wildcard
+charcacter substitute for any other character or  characters  in
+file name, like the asterisk character ("`*`") substitutes for
+any zero or more characters, and the question mark ("`?`")
+substitutes for any one character. But lf use regular expression,
+it provide more concise and flexible means for matching strings
+of path and file name. Another interesting feature is lf can
+colorize the output, like `ls --color=auto` on UNIX.
+
+# OPTIONS
+
+-a, --all
+> Do not ignore hidden file.
+
+-A, --absolute-path
+> Always show absolute path.
+
+-e, --exec command
+> Execute command. The file/director names held can be replayed by
+> the sequences `<1>` .. `<n>`, `<0>` is replaced with the full path
+> name by the pattern. A range of consecutive names can be specified
+> by separating the first and last numbers in the range with a comma.
+> For example, `<1,n>` is the same with `<0>`.
+
+-h, --help
+> Display this help and exit.
+
+-i, --ignore-case
+> Ignore case.
+
+-r, --relative-path
+> Always show relative path.
+
+# PATTERN
+
+The pattern expressions support both wildcard character and regular
+expressions, the regexp enclosed in angle brackets ("<" and ">").
+
+# ENVIROMENT VARIABLES
+
+USERPROFILE
+> The `%UserProfile%` variable is  a  special system-wide
+> environment variable found on Microsoft Windows NT and
+> its derivatives. Its value is the location of the
+> current user's profile directory, in which is found that
+> user's HKCU registry hive (NTUSER).
+
+# EXIT STATUS
+
+lf exits with status 0 if all files are processed successfully, greater than 0 if errors occur.
+
+# EXAMPLES
+
+1. lf "workspaces\project<[1-9]>\src\*.cpp" -e "copy <0> backup\<2,4>"
+
+> Copy all c plus plus files in src under project1 .. project9 to
+> `backup\prject*\src` folder, and save with same file name.
+
+# AUTHOR
+
+  Written by Zhang, Zepeng (Joe).
+
+# COPYRIGHT
+
+lf uses Microsoft regular expression library, GRETA 2.6.4, you should
+follow the related license for using greta. But lf self is free software
+(of couse, open source), you may do anything you want with the source code,
+you can even tell your <(girl|boy)?friends?> (It's also is a regular
+expression, HAHA) the author is you! I only hope this tool can save your time.
+
+# BUGS
+
+Email bug reports to <[redraiment@gmail.com]>. Thanks!
